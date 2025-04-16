@@ -1,10 +1,30 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import gherkin.Kalkulator;
 
 public class kalkulatorTest {
+
+     @BeforeAll
+    static void setupAll() {
+        System.out.println("Before All Tests");
+    }
+
+    @BeforeEach
+    void setup() {
+        System.out.println("Before Each Test");
+    }
+
+    // @Test
+    // void testAdd() {
+    //     Assertions.assertEquals(4, 2 + 2);
+    // }
+
+
     
     @Test //in junit 5 u dont need to make it public and dont need to return anything so u can use void
     //TEST SCENARIO 1
@@ -35,7 +55,6 @@ public class kalkulatorTest {
         // if atleast one of the condition is false then the test will fail
 
     }
-
 
     //TEST the pennjumlahan method
 

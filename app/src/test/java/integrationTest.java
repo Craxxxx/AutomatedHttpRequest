@@ -2,7 +2,7 @@
 import io.restassured.RestAssured;
 
 //the import before all below is used to import the BeforeAll annotation
-import org.junit.jupiter.api.BeforeAll;
+//import org.junit.jupiter.api.BeforeAll;
 
 //the import below is used to import the Test annotation
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class integrationTest {
 
-    //testcase 1
+    //testcase 1 //API TESTING
     @Test
     void testGetUser(){
 
