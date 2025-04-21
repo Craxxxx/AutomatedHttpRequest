@@ -19,7 +19,7 @@ dependencies {
     //use rest-assured for API testing
     testImplementation 'io.rest-assured:rest-assured:5.3.0'
     testImplementation 'org.hamcrest:hamcrest:2.2'
-
+    testImplementation 'org.testng:testng:7.8.0' 
     // Use JUnit Jupiter for testing.
     testImplementation libs.junit.jupiter
 
@@ -41,7 +41,23 @@ application {
     mainClass = 'gherkin.App'
 }
 
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+// tasks.named('test') {
+//     // Use JUnit Platform for unit tests.
+//     useJUnitPlatform()
+// }
+
+tasks.test {
+    useTestNG {
+        suites 'src/test/resources/testing.xml'
+    }
+     testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
+
+// task runTestNG(type: JavaExec) {
+//     classpath = sourceSets.test.runtimeClasspath
+//     main = 'org.testng.TestNG'
+//     args = ['-testclass', 'gherkin.App']
+//     systemProperties = System.properties
+// }

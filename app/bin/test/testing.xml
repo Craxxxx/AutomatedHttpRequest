@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<suite name="Test Suite Jayjay">  
+  <test name="kalkulatorTestTestNG">  
+    <classes>  
+      <class name="kalkulatorTestTestNG"/>  
+    </classes>  
+  </test> 
+</suite>

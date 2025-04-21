@@ -10,9 +10,9 @@ public class Kalkulator {
     // Penjumlahan
 
     //penjumlahan salah
-    public int pennjumlahan(int a, int b) {
-        return a * b;
-    }
+    // public int pennjumlahan(int a, int b) {
+    //     return a * b;
+    // }
     //penjumlahan salah
 
     // pengurangan
