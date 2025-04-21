@@ -8,7 +8,11 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    
 }
+
+group 'org.example'
+version '1.0-SNAPSHOT'
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -17,13 +21,25 @@ repositories {
 
 dependencies {
     //use rest-assured for API testing
-    testImplementation 'io.rest-assured:rest-assured:5.3.0'
+    // REST Assured - align versions
+    def restAssuredVersion = '5.5.1'
+    testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+    testImplementation "io.rest-assured:json-schema-validator:${restAssuredVersion}"
+
+
     testImplementation 'org.hamcrest:hamcrest:2.2'
-    testImplementation 'org.testng:testng:7.8.0' 
+    
+    //JSON
+    testImplementation 'org.json:json:20220924'
+
+    //testNG
+     testImplementation 'org.testng:testng:7.8.0'
+
+
     // Use JUnit Jupiter for testing.
     testImplementation libs.junit.jupiter
 
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    //testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // This dependency is used by the application.
     implementation libs.guava
