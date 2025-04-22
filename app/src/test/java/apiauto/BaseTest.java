@@ -24,7 +24,7 @@ public class BaseTest {
     public void setup()
     {
         //1. configuring base URI and port for the api (bisa di override via -D)
-        RestAssured.baseURI = System.getProperty("api.baseUri","https://reqres.in/");
+        RestAssured.baseURI = System.getProperty("api.baseUri","https://gorest.co.in/");
         RestAssured.port    = Integer.parseInt(System.getProperty("api.port", "443")); //default port for https
 
         //2. Relaxed HTTPS (untuk self-signed certificate atau cert dev)
@@ -34,10 +34,14 @@ public class BaseTest {
             //b. Allows testing APIs with self-signed certificates
             //c. Useful in development/testing environments
 
+        //DEFINE MY BEARER TOKEN (For gorest.co.in)
+        String token = "a7911d0f53a0b598588709206faa2463f8773c871a63881024fccdb5b09ae027";
+
         //3. make the default requestSPecification
         requestSpec = new RequestSpecBuilder()
             .setContentType("application/json")
             .addHeader("Accept", "application/json")
+            .addHeader("Authorization", "Bearer " + token) //set the bearer token
             // .addFilter(new RequestLoggingFilter()) // log tiap request
             .build();
 

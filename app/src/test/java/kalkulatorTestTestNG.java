@@ -35,6 +35,7 @@ public class kalkulatorTestTestNG {
 
     @Test
     public void testPenjumlahan() {
+        System.out.println("TestPenjumlahan");
         assertEquals(2, kalkulator.penjumlahan(1, 1));
         assertTrue(2 == kalkulator.penjumlahan(1, 1));
     }
@@ -42,18 +43,21 @@ public class kalkulatorTestTestNG {
    
     @Test
     public void testPengurangan() {
+        System.out.println("TestPengurangan");
         assertEquals(0, kalkulator.pengurangan(2, 2));
         assertTrue(0 == kalkulator.pengurangan(2, 2));
     }
 
     @Test
     public void testPerkalian() {
+        System.out.println("TestPerkalian");
         assertEquals(4, kalkulator.perkalian(2, 2));
         assertTrue(4 == kalkulator.perkalian(2, 2));
     }
 
     @Test
     public void testPembagian() {
+        System.out.println("TestPembagiam");
         assertEquals(1, kalkulator.pembagian(2, 2));
         assertTrue(1 == kalkulator.pembagian(2, 2));
     }
