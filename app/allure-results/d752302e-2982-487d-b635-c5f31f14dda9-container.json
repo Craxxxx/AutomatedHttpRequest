@@ -1,0 +1,1 @@
+{"uuid":"d752302e-2982-487d-b635-c5f31f14dda9","name":"apiauto.APItest","children":["aaeed2cd-4499-49fe-a6c4-cb3e3216f2bd"],"befores":[{"name":"StartingPoint","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1745435389360,"stop":1745435389361}],"afters":[],"start":1745435389348,"stop":1745435391499}

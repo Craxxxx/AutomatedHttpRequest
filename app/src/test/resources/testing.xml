@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>  
-<suite name="Test Suite Jayjay">  
-  <test name="kalkulatorTestTestNG">  
+<suite name="Test Suite API">  
+  <test name="APItest HTTP Request">  
     <classes>  
-      <class name="kalkulatorTestTestNG"/>  
+      <class name="apiauto.APItest"/>
+      <class name="apiauto.APItestFail"/> 
+      <class name="apiauto.APItestEdge"/>
     </classes>  
   </test> 
 </suite>

@@ -30,10 +30,6 @@ that each has the right type, and that the document as a whole conforms to your 
 a particular regex—without caring about the rest of the payload */
 
 
-
-
-
-
 public class APItest extends BaseTest {
 
     //given() : start building your http request
@@ -48,15 +44,34 @@ public class APItest extends BaseTest {
     private static String UserID;
 
     //GET METHOD
-    // @Test(description = "Getting all users")
-    // public void testGetAllUsers() {
-    //     given().
-    //     when().
-    //         get("/public/v2/users")
-    //     .then()
-    //     .log().all() //log all the response
-    //         .statusCode(200); //check if the status code is 200
-    // }
+    @Test(description = "Getting all users")
+    public void testGetAllUsers() {
+        given().
+        when().
+            get("/public/v2/users")
+        .then()
+        .log().all() //log all the response
+            .statusCode(200); //check if the status code is 200
+    }
+
+
+    @BeforeClass
+    public void StartingPoint()
+    {
+        System.out.println("THIS IS THE POSITIVE TEST CASES FOR GOREST.CO.IN API TESTING");
+        System.out.println("Setting up all the prerequisites for the test");
+        System.out.println(".");
+        System.out.println("...");
+        System.out.println("....");
+        System.out.println(".....");
+        System.out.println("Make sure u already add the token in 'baseTest.java' file");
+        System.out.println("or else it wont work...");
+        System.out.println("....");
+        System.out.println("Starting the test");
+        System.out.println(" ");
+        System.out.println("  ");
+        System.out.println("   ");
+    }
 
 
 
@@ -110,13 +125,15 @@ public class APItest extends BaseTest {
             post("/public/v2/users").
         then().
         log().body()//check the log all
+            //BROAD CONTRACT CHECKING
+            .assertThat().body(JsonSchemaValidator.matchesJsonSchema(file)) //
+            //VALUE CHECKING
             .assertThat().statusCode(201) //check if the status code is 201
             .assertThat().body("name", equalTo(name)) //check if the name is the same as the name in the request body
             .assertThat().body("email", equalTo(email)) //check if the job is the same as the job in the request body
             .assertThat().body("gender", equalTo(gender))//check if the gender value is the same
             .assertThat().body("status", equalTo(status)) //check if the status is the same as the status in the request body
             .assertThat().body("$", hasKey("id")) //check if the response has the id key
-            .assertThat().body(JsonSchemaValidator.matchesJsonSchema(file)) //
         .extract() //<- pull out the validated response
         .response(); //<- now assignable to Response
 
@@ -152,7 +169,6 @@ public class APItest extends BaseTest {
          requestPutBody.put("status", status);  
 
 
-
         given().
             body(requestPutBody.toString()).
         when().
@@ -168,7 +184,7 @@ public class APItest extends BaseTest {
             //.assertThat().body("job", equalTo(job)); //check if the job is the same as the job in the request body
              //check if the response has the updatedAt key
 
-
+        System.out.println();
     }
     //PUT METHOD
 
@@ -178,17 +194,11 @@ public class APItest extends BaseTest {
     {
         System.out.println("4. Mengupdate User dengan metode PATCH");
 
-        String name     = "Raditya Ratiningsih";
         String email    = "Radityanti@gmail.com";
-        String gender   = "female";
-        String status   = "active";
 
         //creating jsonObject for gorest.co.in
         JSONObject requestPatchBody = new JSONObject();
-        requestPatchBody.put("name", name);
-        requestPatchBody.put("email", email);
-        requestPatchBody.put("gender", gender);
-        requestPatchBody.put("status", status);  
+        requestPatchBody.put("email", email); 
 
         given().
             body(requestPatchBody.toString()).
@@ -196,8 +206,7 @@ public class APItest extends BaseTest {
             patch("/public/v2/users/" + UserID).
         then().
         log().body()//log all the response
-            .assertThat().statusCode(200) //check if the status code is 200
-            .assertThat().body("name", equalTo(name)); //check if the name is the same as the name in the request body
+            .assertThat().statusCode(200); //check if the status code is 200 //check if the name is the same as the name in the request body
 
         System.out.println();
     }

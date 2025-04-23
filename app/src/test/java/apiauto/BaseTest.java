@@ -12,6 +12,7 @@ import io.restassured.specification.RequestSpecification;
 //import all testNG annotations
 import org.testng.annotations.*;
 
+
 public class BaseTest {
     //io.restassured.specification yang menyediakan metode-metode 
     //fluent untuk mengonfigurasi detail HTTP request dalam pengujian API menggunakan REST Assured.
@@ -20,7 +21,7 @@ public class BaseTest {
 
 
     //setup method that will always initialize before the test
-    @BeforeClass
+    @BeforeSuite
     public void setup()
     {
         //1. configuring base URI and port for the api (bisa di override via -D)
@@ -55,7 +56,4 @@ public class BaseTest {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(); //log request and response if validation fails
         
     }
-
-
-
 }
