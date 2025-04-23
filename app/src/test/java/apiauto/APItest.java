@@ -8,17 +8,30 @@ import netscape.javascript.JSObject;
 //importing the restAssured Libary
 import static io.restassured.RestAssured.*;
 
+import io.restassured.module.jsv.JsonSchemaValidator;
 //importing response from restAssured to capture the json response
 import io.restassured.response.Response;
 
-
-
-
-import org.hamcrest.Matcher;
 import static org.hamcrest.Matchers.*; //importing all matchers from hamcrest library
+
+import java.io.File;
 
 import static org.hamcrest.MatcherAssert.*; //importing all matchers from hamcrest library
 import org.json.JSONObject;
+
+import static io.restassured.module.jsv.JsonSchemaValidator.*; //importing json schema validator from restAssured
+
+
+//DIFFERENCE BETWEEN SHCEMAS ASSERTION AN TARGETED ASSERTION
+/*A SCHEMA assertion validates the entire structure of your JSON payload in one shot—checking that every field is present (or absent), 
+that each has the right type, and that the document as a whole conforms to your contract */
+
+/*A targeted assertion zeroes in on specific values or business rules—for example, that "status" equals "active" or that "id" matches 
+a particular regex—without caring about the rest of the payload */
+
+
+
+
 
 
 public class APItest extends BaseTest {
@@ -52,13 +65,15 @@ public class APItest extends BaseTest {
     public void testGetUsersById()
     {
         System.out.println("2. Mendapatkan Data User Dengan ID yang sudah di generate sebelumnya");
-        System.out.println();
+        
         given().
         when().
             get("/public/v2/users/" + UserID) //get the user with the id that was created before
         .then()
         .log().body()
             .statusCode(200); //check if the status code is 200
+
+        System.out.println();
     }
     //GET METHOD
 
@@ -68,16 +83,7 @@ public class APItest extends BaseTest {
     public void testPostAddingUser()
     {
         System.out.println("1. Menambahkan User Baru Dengan Metode Post");
-        System.out.println();
-        //u need to create the requestBody first for the post Method
-        // String name = "Radit";
-        // String job = "Qa engineer";
-
-          //now create a jason with the value above
-        //   JSONObject requestBody = new JSONObject();
-        //   requestBody.put("name", name);
-        //   requestBody.put("job", job);  
-
+       
         //creating request body  for gorest.co.in
         String name     = "Radit";
         String email    = "radityastanjung@gmail.com";
@@ -90,6 +96,8 @@ public class APItest extends BaseTest {
         requestBody.put("email", email);
         requestBody.put("gender", gender);
         requestBody.put("status", status);  
+
+        File file = new File("src/test/resources/schemas/UserSchema.json");
 
         
         //USER ASSERTION TO VALIDATE ALL KINDS OF THINGS U WANT TO VALIDATE IN THE RESPONSE
@@ -105,9 +113,10 @@ public class APItest extends BaseTest {
             .assertThat().statusCode(201) //check if the status code is 201
             .assertThat().body("name", equalTo(name)) //check if the name is the same as the name in the request body
             .assertThat().body("email", equalTo(email)) //check if the job is the same as the job in the request body
-            .assertThat().body("gender", equalTo(gender))
+            .assertThat().body("gender", equalTo(gender))//check if the gender value is the same
             .assertThat().body("status", equalTo(status)) //check if the status is the same as the status in the request body
             .assertThat().body("$", hasKey("id")) //check if the response has the id key
+            .assertThat().body(JsonSchemaValidator.matchesJsonSchema(file)) //
         .extract() //<- pull out the validated response
         .response(); //<- now assignable to Response
 
@@ -115,6 +124,8 @@ public class APItest extends BaseTest {
         UserID = response.jsonPath().getString("id"); //get the id from the response and assign it to the UserID variable
         //System.out.println(UserID);
         //System.out.println(response.getBody().asPrettyString());
+
+        System.out.println();
     }       
     //POST METHOD
 
@@ -127,7 +138,6 @@ public class APItest extends BaseTest {
         //I WILL USE THE BEST PRACTICE TO USE PATCH METHOD 
 
         System.out.println("3. Mengupdate User dengan Metode PUT");
-        System.out.println();
 
          String name     = "Herdiyanti";
          String email    = "herdiyantisitorus@gmail.com";
@@ -148,7 +158,7 @@ public class APItest extends BaseTest {
         when().
             put("/public/v2/users/" + UserID).
         then().
-        log().all()//log all the response
+        log().body()//log all the response
             .assertThat().statusCode(200) //check if the status code is 200
             .assertThat().body("name", equalTo(name))
             .assertThat().body("email", equalTo(email)) //check if the job is the same as the job in the request body
@@ -167,7 +177,6 @@ public class APItest extends BaseTest {
     public void testPatchUpdateUser()
     {
         System.out.println("4. Mengupdate User dengan metode PATCH");
-        System.out.println();
 
         String name     = "Raditya Ratiningsih";
         String email    = "Radityanti@gmail.com";
@@ -186,10 +195,11 @@ public class APItest extends BaseTest {
         when().
             patch("/public/v2/users/" + UserID).
         then().
-        log().all()//log all the response
+        log().body()//log all the response
             .assertThat().statusCode(200) //check if the status code is 200
             .assertThat().body("name", equalTo(name)); //check if the name is the same as the name in the request body
 
+        System.out.println();
     }
     //PATCH METHOD
 
@@ -198,13 +208,12 @@ public class APItest extends BaseTest {
     public void testDeleteUser()
     {
         System.out.println("5. Menghapus User dengan metode DELETE");
-        System.out.println();
         //DELETE METHOD
         given().
         when().
             delete("/public/v2/users/" + UserID ).
         then().
-            log().all()//log all the response
+            log().body()//log all the response
             .statusCode(204); //check if the status code is 204
 
         //removing the value of USerID so that it can be reused in the next test
