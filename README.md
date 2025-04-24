@@ -5,10 +5,10 @@ Tugas 18| Module 20
 Before you begin, ensure you have the following installed on your machine:
 
 1. Java 21 SDK (or compatible JDK)
-2.Git for cloning the repository 
-4.Gradle Wrapper (included in this project) 
-5.Allure Command-Line for report generation and viewing Allure Report
-6. Internet access (for initial dependency download)
+2. Git for cloning the repository 
+3. Gradle Wrapper (included in this project) 
+4. Allure Command-Line for report generation and viewing Allure Report
+5. Internet access (for initial dependency download)
 
   
 
